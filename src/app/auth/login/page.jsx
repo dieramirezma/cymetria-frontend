@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { login } from "@/app/lib/api";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Home() {
   const [errorReq, setErrorReq] = useState('')
@@ -69,9 +70,10 @@ export default function Home() {
               />
               {errors.password && <small className="fs-6 text-danger">{errors.password.message}</small>}
             </div>
-            <div className="col-12 col-lg-12 d-flex justify-content-center">
-              <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
-            </div>
+              <div className="row d-flex justify-content-center">
+                  <button type="submit" className="btn btn-primary col-12 col-lg-6 ">Iniciar Sesión</button>
+                  <Link href="/auth/register" type="button" className="btn btn-primary col-12 col-lg-6 ">Ir a Registro</Link>
+              </div>
           </div>
         </form>
       </div>

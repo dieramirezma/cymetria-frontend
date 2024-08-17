@@ -12,12 +12,9 @@ export default function Home() {
   const [data, setData] = useState(null)
   const { register, handleSubmit, formState: { errors } } = useForm()
 
-  let infoToken = null
+  const token = localStorage.getItem('authToken')
+  const infoToken = jwt.decode(token)
 
-  if (typeof window !== 'undefined') {
-    const token = localStorage.getItem('authToken')
-    infoToken = jwt.decode(token)
-  }
 
   const router = useRouter()
 
@@ -43,9 +40,9 @@ export default function Home() {
   }
   return (
     <ProtectedRoute>
-      <header className="d-flex align-items-center justify-content-end bg-light header">
+      <div className="d-flex align-items-center justify-content-end bg-light header">
         <Image src={'logout.svg'} alt="Logout icon" width={20} height={20} className="logout mx-3" onClick={logout}/>
-      </header>
+      </div>
     <main className="d-flex flex-column align-items-center justify-content-center min-vh-100">
         <h1>Hola, { infoToken ? infoToken.userName : "Usuario" }</h1>
       <div className="container">
@@ -68,7 +65,7 @@ export default function Home() {
                     message: 'Máximo 10 dígitos'
                 },
                 pattern: {
-                  value: /^((\d)\1{5})/,
+                  value: /^(?!.*(\d)\1{5}).*$/,
                   message: 'Ingresa un número de documento válido'
                 }
               })}
