@@ -17,7 +17,9 @@ export default function Home() {
 
     if (res.status === 200) {
       const token = res.data.token
-      localStorage.setItem('authToken', token);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('authToken', token);
+      }
       router.push('/')
     } else {
       setErrorReq("Correo o contraseña incorrectos")

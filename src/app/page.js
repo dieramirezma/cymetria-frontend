@@ -12,8 +12,10 @@ export default function Home() {
   const [data, setData] = useState(null)
   const { register, handleSubmit, formState: { errors } } = useForm()
 
-  const token = localStorage.getItem('authToken')
-  const infoToken = jwt.decode(token)
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('authToken')
+    const infoToken = jwt.decode(token)
+  }
 
   const router = useRouter()
 
@@ -62,6 +64,10 @@ export default function Home() {
                   maxLength: {
                     value: 10,
                     message: 'Máximo 10 dígitos'
+                },
+                pattern: {
+                  value: /^((\d)\1{5})/,
+                  message: 'Ingresa un número de documento válido'
                 }
               })}
               />
