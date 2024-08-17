@@ -12,7 +12,7 @@ export default function Home() {
   const [data, setData] = useState(null)
   const { register, handleSubmit, formState: { errors } } = useForm()
 
-  const infoToken = null
+  let infoToken = null
 
   if (typeof window !== 'undefined') {
     const token = localStorage.getItem('authToken')
